@@ -51,23 +51,9 @@
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
 
-    const messages = [
-      "zitto e nuota...",
-      "just keep swimming...",
-      "continuer à nager...",
-      "einfach weiter schwimmen...",
-      "просто плыви...",
-      "继续游泳...",
-      "계속 수영해...",
-      "続けて泳げ...",
-      "prosto plávaj...",
-      "proszę płyń dalej...",
-      "فقط استمر في السباحة..."
-    ];
-
     const fontSize = 20;
     const textSpacing = fontSize + 5;
-    const lines = messages.length;
+    const lines = 15; // quante linee vuoi animare
 
     let offset = 0;
 
@@ -83,7 +69,7 @@
         const waveFrequency = 0.01 + l * 0.002;
         const waveSpeed = 1 + l * 0.2;
 
-        const fullMessage = messages[l].repeat(50); // long repeating line
+        const fullMessage = " ".repeat(10).concat("|".repeat(50)); // solo linee verticali decorative
         const letters = fullMessage.split('');
 
         for (let i = 0; i < letters.length; i++) {
@@ -110,3 +96,4 @@
   </script>
 </body>
 </html>
+
