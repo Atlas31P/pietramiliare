@@ -51,9 +51,23 @@
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
 
+    const messages = [
+      "until we make it",               // English
+      "zitto e nuota zitto e nuota nuota nuota", // Italian
+      "一直到我们成功",                // Chinese (Mandarin)
+      "जब तक हम सफल न हों",          // Hindi
+      "hasta que lo logremos",         // Spanish
+      "حتى ننجح",                      // Arabic
+      "যতক্ষণ না আমরা সফল হচ্ছি",     // Bengali
+      "até conseguirmos",              // Portuguese
+      "пока не добьемся этого",        // Russian
+      "成功するまで",                  // Japanese
+      "jusqu’à ce qu’on y arrive"      // French
+    ];
+
     const fontSize = 20;
     const textSpacing = fontSize + 5;
-    const lines = 15; // quante linee vuoi animare
+    const lines = messages.length;
 
     let offset = 0;
 
@@ -69,7 +83,7 @@
         const waveFrequency = 0.01 + l * 0.002;
         const waveSpeed = 1 + l * 0.2;
 
-        const fullMessage = " ".repeat(10).concat("|".repeat(50)); // solo linee verticali decorative
+        const fullMessage = messages[l].repeat(50);
         const letters = fullMessage.split('');
 
         for (let i = 0; i < letters.length; i++) {
@@ -96,4 +110,3 @@
   </script>
 </body>
 </html>
-
