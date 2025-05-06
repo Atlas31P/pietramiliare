@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Pietra Miliare Maldives</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>PIETRA MILIARE MALDIVE until you make it...</h1>
+</body>
+</html>
