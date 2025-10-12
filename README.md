@@ -1,14 +1,11 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Pietra Miliare Maldives</title>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
   background-color: black;
   overflow: hidden;
@@ -20,6 +17,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  isolation: isolate; /* migliora il blending del logo */
 }
 
 /* Responsive title */
@@ -33,56 +31,68 @@ h1 {
   z-index: 10;
   margin-bottom: 20px;
   text-align: center;
+  pointer-events: none;
 }
 
 /* Canvas behind text */
 canvas {
   position: absolute;
-  top: 0; left: 0;
+  inset: 0;
   width: 100%; height: 100%;
   z-index: 0;
   display: block;
 }
 
-/* Logo and shark GIF styling */
+/* Logo PNG: rende il bianco “trasparente” sul fondo nero */
 #logo {
   width: clamp(120px, 20vw, 200px);
   position: absolute;
   top: 20px;
   left: 20px;
   z-index: 15;
+  opacity: 0.95;
+  mix-blend-mode: multiply;      /* il bianco sparisce sul nero */
+  pointer-events: none;
+  image-rendering: -webkit-optimize-contrast;
 }
 
+/* Shark GIF: centrata e grande su tutti i device */
 #sharkGif {
   position: absolute;
-  bottom: 10%;
-  right: 10%;
-  width: clamp(100px, 15vw, 200px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(240px, 55vw, 900px);
   z-index: 5;
-  opacity: 0.7;
+  opacity: 0.85;
   animation: floatShark 10s ease-in-out infinite;
+  pointer-events: none;
 }
 
 /* Simple floating animation */
 @keyframes floatShark {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-15px) rotate(2deg); }
+  0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(0deg); }
+  50%      { transform: translate(-50%, -50%) translateY(-18px) rotate(2deg); }
 }
 
 /* Mobile optimization */
 @media (max-width: 768px) {
-  h1 {
-    font-size: 30px;
-  }
+  h1 { font-size: 30px; }
+  #logo { width: clamp(100px, 28vw, 160px); }
+  #sharkGif { width: clamp(260px, 70vw, 720px); }
 }
 </style>
 </head>
 
 <body>
-<img id="logo" src="logo.png" alt="Pietra Miliare Logo" />
-<h1>PIETRA MILIARE MALDIVES</h1>
-<canvas id="matrixCanvas"></canvas>
-<img id="sharkGif" src="shark.gif" alt="Shark animation" />
+  <!-- Usa il tuo PNG originale; il bianco verrà “assorbito” dal fondo nero -->
+  <img id="logo" src="logo.png" alt="Pietra Miliare Logo" />
+
+  <h1>PIETRA MILIARE MALDIVES</h1>
+  <canvas id="matrixCanvas"></canvas>
+
+  <!-- GIF centrata e grande -->
+  <img id="sharkGif" src="shark.gif" alt="Shark animation" />
 
 <script>
 const canvas = document.getElementById("matrixCanvas");
@@ -110,39 +120,4 @@ const textSpacing = fontSize + 5;
 const lines = messages.length;
 let offset = 0;
 
-function draw() {
-  ctx.clearRect(0, 0, width, height);
-  ctx.font = `${fontSize}px Courier New`;
-  ctx.shadowColor = "#00ffff";
-  ctx.shadowBlur = 10;
-
-  for (let l = 0; l < lines; l++) {
-    const yOffset = (height / lines) * (l + 1);
-    const waveAmplitude = 20 + l * 3;
-    const waveFrequency = 0.01 + l * 0.002;
-    const waveSpeed = 1 + l * 0.2;
-    const fullMessage = messages[l].repeat(50);
-    const letters = fullMessage.split('');
-
-    for (let i = 0; i < letters.length; i++) {
-      const x = ((i * textSpacing) - (offset * waveSpeed)) % (width + letters.length * textSpacing);
-      const y = yOffset + Math.sin((x + offset) * waveFrequency) * waveAmplitude;
-      const hue = 180 + (l * 10) % 60;
-      ctx.fillStyle = `hsl(${hue}, 100%, 60%)`;
-      ctx.fillText(letters[i], x < 0 ? x + width : x, y);
-    }
-  }
-
-  offset += 1.5;
-  requestAnimationFrame(draw);
-}
-draw();
-
-window.addEventListener('resize', () => {
-  width = canvas.width = window.innerWidth;
-  height = canvas.height = window.innerHeight;
-});
-</script>
-</body>
-</html>
-
+function dra
