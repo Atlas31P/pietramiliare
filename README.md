@@ -104,9 +104,6 @@ canvas {
     </filter>
   </svg>
 
-  <!-- Logo centrato in alto -->
-  <img id="logo" src="logo.png" alt="Pietra Miliare Logo" />
-
   <!-- Titolo -->
   <h1>PIETRA MILIARE MALDIVES</h1>
 
